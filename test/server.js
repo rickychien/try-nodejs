@@ -1,17 +1,31 @@
-var Browser = require('zombie');
-var browser = new Browser();
-var assert = require('assert');
-var server = require('../server/server');
+var Browser = require('zombie'),
+    browser = new Browser(),
+    assert = require('assert'),
+    server = require('../server/server'),
+    router = require('../server/router'),
+    requestHandler = require('./server/requestHandler');
 
-var url = "http://localhost:8888";
+before(function() {
+  var handle = {};
+  handle["/"] = requestHandler.start;
+  handle["/start"] = requestHandler.start;
+  handle["/upload"] = requestHandler.upload;
+  handle["/show"] = requestHandler.show;
+  //server.start(router.route, handle);
+});
 
 suite('GET', function() {
-  suite('/', function() {
-    test('should return request object', function() {
-      browser.visit(url + "/");
+  before(function() {
+    this.browser = new Browser({ site: 'http://140.115.53.50:8888' });
+  });
 
+  suite('/', function() {
+    beforeEach(function(done) {
+      this.browser.visit('/', done);
+    });
+
+    test('should return request object', function() {
       assert.notEqual(undefined, server);
     });
   });
 });
-

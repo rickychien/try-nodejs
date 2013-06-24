@@ -1,6 +1,6 @@
-var querystring = require("querystring");
-var fs = require('fs');
-var formidable = require("formidable");
+var querystring = require("querystring"),
+    fs = require('fs'),
+    formidable = require("formidable");
 
 function start(response) {
   console.log("Request handler 'start' was called.");
