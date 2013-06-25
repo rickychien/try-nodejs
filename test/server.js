@@ -3,7 +3,7 @@ var Browser = require('zombie'),
     assert = require('assert'),
     server = require('../server/server'),
     router = require('../server/router'),
-    requestHandler = require('./server/requestHandler');
+    requestHandler = require('../server/requestHandler');
 
 before(function() {
   var handle = {};
