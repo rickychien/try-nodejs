@@ -25,15 +25,11 @@ function start(response) {
 function upload(response, request) {
   var form = new formidable.IncomingForm();
   form.parse(request, function(error, fields, files) {
-    if (error) {
-      console.log("data parsing error: " + error);
-    } else if (!files.upload) {
-      console.log("upload data error: " + error);
+    if (!files.upload) {
       response.writeHead(200, {"Content-Type": "text/html"});
       response.write("upload data error, please retry again.<br/>");
       response.end();
     } else {
-      console.log("image data parsing done");
       fs.renameSync(files.upload.path, "/tmp/test.jpg");
       response.writeHead(200, {"Content-Type": "text/html"});
       response.write("received image:<br/>");
