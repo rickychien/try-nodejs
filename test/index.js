@@ -1,12 +1,14 @@
 var Browser = require('zombie'),
-    assert = require('assert'),
-    server = require('../server/index');
+  assert = require('assert'),
+  server = require('../server/index');
 
 suite('Index', function() {
   'use strict';
 
   suiteSetup(function() {
-    this.browser = new Browser({ site: 'http://localhost:8888' });
+    this.browser = new Browser({
+      site: 'http://localhost:8888'
+    });
   });
 
   suite('Visit /', function() {
@@ -52,16 +54,17 @@ suite('Index', function() {
       }.bind(this));
     });
 
-    test('test upload image', function(done) {
+    test('upload image', function(done) {
+      var self = this;
       this.browser.visit('/', function() {
-        this.browser
-          .attach('input[type=file]', '/tmp/test.jpg')
-          .pressButton('input[type=submit]', function() {
-            assert.equal(this.browser.location.pathname, '/upload');
-            assert.ok(this.browser.query('img[src="/show"]'));
-            done();
-          }.bind(this));
-      }.bind(this));
+        self.browser
+        .attach('input[type=file]', '/tmp/test.jpg')
+        .pressButton('input[type=submit]', function() {
+          assert.equal(self.browser.location.pathname, '/upload');
+          assert.ok(self.browser.query('img[src="/show"]'));
+          done();
+        });
+      });
     });
   });
 });
