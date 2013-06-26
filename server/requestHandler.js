@@ -3,8 +3,6 @@ var querystring = require("querystring"),
     formidable = require("formidable");
 
 function start(response) {
-  console.log("Request handler 'start' was called.");
-
   var body = '<html>'+
     '<head>'+
     '<meta http-equiv="Content-Type" content="text/html; '+
@@ -25,8 +23,6 @@ function start(response) {
 }
 
 function upload(response, request) {
-  console.log("Request handler 'upload' was called.");
-
   var form = new formidable.IncomingForm();
   form.parse(request, function(error, fields, files) {
     if (error) {
@@ -48,7 +44,6 @@ function upload(response, request) {
 }
 
 function show(response) {
-  console.log("Request handler 'show' was called.");
   fs.readFile("/tmp/test.jpg", "binary", function(error, file) {
     if(error) {
       response.writeHead(500, {"Content-Type": "text/plain"});
