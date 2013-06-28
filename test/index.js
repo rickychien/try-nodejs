@@ -58,7 +58,7 @@ suite('Index', function() {
       var self = this;
       this.browser.visit('/', function() {
         self.browser
-        .attach('input[type=file]', '/tmp/test.jpg')
+        .attach('input[type=file]', 'test/test.jpg')
         .pressButton('input[type=submit]', function() {
           assert.equal(self.browser.location.pathname, '/upload');
           assert.ok(self.browser.query('img[src="/show"]'));
