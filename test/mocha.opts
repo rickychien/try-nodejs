@@ -1,3 +1,4 @@
---reporter spec
 --recursive
 --ui tdd
+--require blanket
+--reporter spec

@@ -1,6 +1,6 @@
 var Browser = require('zombie'),
   assert = require('assert'),
-  server = require('../server/index');
+  server = require('../src/index');
 
 suite('Index', function() {
   'use strict';

@@ -2,8 +2,13 @@
   "name": "server",
   "version": "0.0.1",
   "private": true,
+  "scripts": { 
+    "blanket": { "pattern": "src"} 
+  },
   "dependencies": {
     "formidable": ">= 1.0.14",
-    "zombie": "*"
+    "mocha": "*",
+    "zombie": "*",
+    "blanket": "*"
   }
 }
