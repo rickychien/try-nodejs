@@ -14,6 +14,8 @@ test-cov:
 	@JSCOV=1 $(MAKE) test REPORTER=html-cov > coverage.html && open coverage.html
 	@rm -rf ./src-cov
 
+test-all: test test-cov
+
 clean:
 	rm -rf src-cov
 	rm -f coverage.html
