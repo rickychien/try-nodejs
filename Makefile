@@ -1,5 +1,7 @@
 REPORTER = spec
 TIMEOUT = 5000
+TEST_UI = tdd
+MOCHA_OPTS =
 
 install:
 	@npm install
@@ -7,17 +9,22 @@ install:
 test:
 	@NODE_ENV=test ./node_modules/mocha/bin/mocha \
 		--reporter $(REPORTER) \
-		--timeout $(TIMEOUT)
+		--timeout $(TIMEOUT) \
+		--ui $(TEST_UI) \
+		--require blanket \
+		--recursive
 
-test-cov:
-	@jscoverage src src-cov
-	@JSCOV=1 $(MAKE) test REPORTER=html-cov > coverage.html && open coverage.html
-	@rm -rf ./src-cov
+test-coverage:
+	@URLRAR_COV=1 $(MAKE) test \
+		MOCHA_OPTS='--require blanket' \
+		REPORTER=html-cov > coverage.html && open coverage.html
 
-test-all: test test-cov
+test-all: test test-coverage
 
 clean:
-	rm -rf src-cov
-	rm -f coverage.html
+	@if [ -a coverage.html ]; \
+	then \
+		rm coverage.html; \
+	fi
 
 .PHONY: test
