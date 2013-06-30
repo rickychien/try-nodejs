@@ -6,6 +6,9 @@ MOCHA_OPTS =
 install:
 	@npm install
 
+run-server:
+	@node ./src/index.js
+
 test:
 	@NODE_ENV=test ./node_modules/mocha/bin/mocha \
 		--reporter $(REPORTER) \
