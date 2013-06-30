@@ -22,8 +22,6 @@ test-coverage:
 		MOCHA_OPTS='--require blanket' \
 		REPORTER=html-cov > coverage.html && open coverage.html
 
-test-all: test test-coverage
-
 clean:
 	@if [ -a coverage.html ]; \
 	then \
