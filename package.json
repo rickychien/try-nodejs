@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": { 
-    "blanket": { "pattern": "try-nodejs/src"} 
+    "blanket": {
+      "pattern": "try-nodejs/src"
+      },
+    "test": "make test"
   },
   "dependencies": {
     "formidable": ">= 1.0.14",
