@@ -1,6 +1,7 @@
 var Browser = require('zombie'),
   assert = require('assert'),
-  server = require('../src/index');
+  server = require('../src/index'),
+  fs = require('fs');
 
 suite('Index', function() {
   'use strict';
@@ -49,7 +50,7 @@ suite('Index', function() {
 
     test('show an error message with directly visit', function(done) {
       this.browser.visit('/upload', function() {
-        assert.equal(this.browser.text('body'), 'upload data error, please retry again.');
+        assert.equal(this.browser.text('body'), 'upload file error, please retry again.');
         done();
       }.bind(this));
     });
@@ -65,6 +66,28 @@ suite('Index', function() {
           done();
         });
       });
+    });
+
+    test('upload without image file', function(done) {
+      var self = this;
+      this.browser.visit('/', function() {
+        self.browser
+        .pressButton('input[type=submit]', function() {
+          fs.renameSync("/tmp/test.jpg", "/tmp/modify.jpg");
+          assert.equal(self.browser.location.pathname, '/upload');
+          assert.equal(self.browser.text('body'), 'upload file error, please ensure to upload an image.');
+          done();
+        });
+      });
+    });
+  });
+
+  suite('Visit /unknown', function() {
+    test('return fail status code 404 not found', function(done) {
+      this.browser.visit('/unknown', function() {
+        assert.equal(this.browser.statusCode, 404);
+        done();
+      }.bind(this));
     });
   });
 });
