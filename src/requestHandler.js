@@ -17,36 +17,28 @@ function start(response) {
     '</body>' +
     '</html>';
 
-  response.writeHead(200, {
-    "Content-Type": "text/html"
-  });
+  response.writeHead(200, {"Content-Type": "text/html"});
   response.write(body);
   response.end();
 }
 
 function upload(response, request) {
   if (request.method != 'POST') {
-    response.writeHead(200, {
-      "Content-Type": "text/html"
-    });
-    response.write("upload data error, please retry again.<br/>");
+    response.writeHead(200, {"Content-Type": "text/html"});
+    response.write("upload file error, please retry again.<br/>");
     response.end();
   } else {
     var form = new formidable.IncomingForm();
     form.parse(request, function(error, fields, files) {
-      if (files.upload.size != 0) {
+      if (files.upload) {
         fs.renameSync(files.upload.path, "/tmp/test.jpg");
-        response.writeHead(200, {
-          "Content-Type": "text/html"
-        });
+        response.writeHead(200, {"Content-Type": "text/html"});
         response.write("received image:<br/>");
         response.write("<img src='/show' />");
         response.end();
       } else {
-        response.writeHead(200, {
-          "Content-Type": "text/html"
-        });
-        response.write("upload data error, please retry again.<br/>");
+        response.writeHead(200, {"Content-Type": "text/html"});
+        response.write("upload file error, please ensure to upload an image.<br/>");
         response.end();
       }
     });
@@ -56,15 +48,11 @@ function upload(response, request) {
 function show(response) {
   fs.readFile("/tmp/test.jpg", "binary", function(error, file) {
     if (error) {
-      response.writeHead(500, {
-        "Content-Type": "text/plain"
-      });
+      response.writeHead(500, {"Content-Type": "text/plain"});
       response.write(error + "\n");
       response.end();
     } else {
-      response.writeHead(200, {
-        "Content-Type": "image/jpg"
-      });
+      response.writeHead(200, {"Content-Type": "image/jpg"});
       response.write(file, "binary");
       response.end();
     }
