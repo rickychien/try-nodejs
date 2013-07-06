@@ -15,7 +15,9 @@ test:
 		--timeout $(TIMEOUT) \
 		--ui $(TEST_UI) \
 		--require blanket \
-		--recursive
+		--recursive \
+		--colors \
+		2> error.txt
 
 test-coverage:
 	@URLRAR_COV=1 $(MAKE) test \
