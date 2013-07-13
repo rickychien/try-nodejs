@@ -10,7 +10,7 @@ run-server:
 	@node ./src/index.js
 
 test:
-	@NODE_ENV=test ./node_modules/mocha/bin/mocha \
+	@./node_modules/mocha/bin/mocha \
 		--reporter $(REPORTER) \
 		--timeout $(TIMEOUT) \
 		--ui $(TEST_UI) \
@@ -20,7 +20,7 @@ test:
 		2> error.txt
 
 test-coverage:
-	@URLRAR_COV=1 $(MAKE) test \
+	@$(MAKE) test \
 		MOCHA_OPTS='--require blanket' \
 		REPORTER=html-cov > coverage.html && open coverage.html
 
