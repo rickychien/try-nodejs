@@ -1,7 +1,7 @@
 REPORTER = spec
 TIMEOUT = 5000
 TEST_UI = tdd
-MOCHA_OPTS =
+MOCHA_OPTS = 
 
 install:
 	@npm install
@@ -14,7 +14,6 @@ test:
 		--reporter $(REPORTER) \
 		--timeout $(TIMEOUT) \
 		--ui $(TEST_UI) \
-		--require blanket \
 		--recursive \
 		--colors \
 		2> error.txt
