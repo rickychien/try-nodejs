@@ -16,6 +16,7 @@ test:
 		--ui $(TEST_UI) \
 		--recursive \
 		--colors \
+		$(MOCHA_OPTS) \
 		2> error.txt
 
 test-coverage:
